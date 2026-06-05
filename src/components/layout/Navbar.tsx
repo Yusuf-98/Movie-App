@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, useNavigate } from 'react-router-dom';
-import SearchIcon from '../../assets/icons/Search.png';
+import SearchIcon from '../../assets/icons/search.png';
 import ArrowBack from '../../assets/icons/arrow-back.png';
 import CloseInput from '../../assets/icons/close-input.png';
 import SearchInput from '../../assets/icons/search-input.png';

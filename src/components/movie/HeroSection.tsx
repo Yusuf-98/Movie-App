@@ -5,7 +5,7 @@ import { useTrendingMovies } from '@/hooks/useMovies';
 import { getImageUrl } from '@/lib/utils';
 import { IMAGE_SIZES } from '@/lib/constants';
 import { Button } from '../ui/button';
-import PlayIcon from '../../assets/icons/Play.png';
+import PlayIcon from '../../assets/icons/play.png';
 
 export function HeroSection() {
   const { data } = useTrendingMovies();

@@ -4,7 +4,7 @@ import { getImageUrl } from '@/lib/utils';
 import { IMAGE_SIZES } from '@/lib/constants';
 import { useNavigate } from 'react-router-dom';
 import type { SearchResultItemProps } from '@/types/movie';
-import PlayIcon from '../../assets/icons/Play.png';
+import PlayIcon from '../../assets/icons/play.png';
 import StarIcon from '../../assets/icons/star-yellow.png';
 import { Button } from '../ui/button';
 import FavoriteIcon from '../ui/FavoriteIcon';

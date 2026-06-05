@@ -4,7 +4,7 @@ import { IMAGE_SIZES } from '@/lib/constants';
 import type { MovieDetailHeroProps } from '@/types/movie';
 import calenderIcon from '../../assets/icons/calenderIcon.svg';
 import { Button } from '../ui/button';
-import PlayIcon from '../../assets/icons/Play.png';
+import PlayIcon from '../../assets/icons/play.png';
 import FavoriteIcon from '../ui/FavoriteIcon';
 import { MovieStats } from './MovieStats';
 
