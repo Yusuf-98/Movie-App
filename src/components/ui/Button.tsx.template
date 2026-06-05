@@ -1,0 +1,40 @@
+import type { ButtonType, ButtonSize, ButtonProps } from '@/types/movie';
+
+const Button: React.FC<ButtonProps> = ({
+  label,
+  type,
+  size,
+  onClick,
+  disabled = false,
+  className = '',
+  image,
+}) => {
+  const baseStyles: Record<ButtonType, string> = {
+    primary:
+      'flex flex-row justify-center items-center p-2 gap-2 bg-primary-200 rounded-full text-neutral-25 font-semibold hover:text-neutral-800 hover:scale-102 focus:outline-none focus:ring focus:ring-offset-2 active:shadow-inner active:bg-primary-300 transition-all duration-300 ease-in-out cursor-pointer',
+    secondary:
+      'flex flex-row justify-center items-center p-2 gap-2 bg-neutral-950 border border-neutral-800 rounded-full text-neutral-25 font-semibold hover:text-neutral-500 hover:scale-102 focus:outline-none focus:ring focus:ring-offset-2 active:shadow-inner active:bg-neutral-900 transition-all duration-300 ease-in-out cursor-pointer',
+  };
+
+  const sizeStyles: Record<ButtonSize, string> = {
+    small: 'h-11 text-size-sm',
+    large: 'h-13 text-size-md',
+  };
+
+  const disabledStyles = 'opacity-50 cursor-not-allowed';
+
+  const buttonClasses = `
+    ${baseStyles[type]}
+    ${sizeStyles[size]}
+    ${disabled ? disabledStyles : ''} 
+    ${className}`.trim();
+
+  return (
+    <button onClick={onClick} disabled={disabled} className={`${buttonClasses}`}>
+      {label}
+      {image && <span className="flex items-center">{image}</span>}
+    </button>
+  );
+};
+
+export default Button;
