@@ -1,7 +1,8 @@
 import { useTrendingMovies } from '@/hooks/useMovies';
 import { MovieCard } from './MovieCard';
 import { MovieCardSkeleton } from './MovieCardSkeleton';
-import { Carousel, CarouselContent, CarouselItem, useCarousel } from '@/components/ui/carousel';
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import { useCarousel } from '../ui/carousel.context';
 import arrowRight from '../../assets/icons/arrowcar-right.png';
 import arrowLeft from '../../assets/icons/arrowcarleft.png';
 

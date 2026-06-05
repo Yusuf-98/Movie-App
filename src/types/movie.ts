@@ -168,9 +168,11 @@ export interface MovieGridProps {
 // --Button--
 
 export type ButtonType = 'primary' | 'secondary';
+export type ButtonSize = 'large' | 'small';
 
 export interface ButtonProps {
   label?: string;
+  variant?: string;
   type: ButtonType;
   onClick?: () => void;
   disabled?: boolean;

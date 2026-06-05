@@ -1,7 +1,5 @@
 import { useState, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
-import { motion } from 'framer-motion';
 import { DetailSkeleton } from '@/components/movie/DetailSkeleton';
 import { useMovieDetails } from '@/hooks/useMovies';
 import { useMovieStore } from '@/store/movieStore';
