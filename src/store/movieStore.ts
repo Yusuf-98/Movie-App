@@ -2,12 +2,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { Movie } from '@/types/movie';
 
-// TODO: Define your store state interface
 interface MovieStore {
-  // TODO: Add state properties
-  // Examples: favorites, watchlist, selectedMovie, etc.
-  // TODO: Add action methods
-  // Examples: addToFavorites, removeFromFavorites, etc.
   favorites: Movie[];
   watchlist: Movie[];
 
@@ -21,9 +16,6 @@ interface MovieStore {
   toggleWatchlist: (movie: Movie) => void;
   isInWatchlist: (movieId: number) => boolean;
 }
-
-// TODO: Create Zustand store
-// Reference: https://zustand.docs.pmnd.rs/getting-started/introduction
 
 export const useMovieStore = create<MovieStore>()(
   persist(
@@ -76,8 +68,6 @@ export const useMovieStore = create<MovieStore>()(
       isInWatchlist: (movieId) => get().watchlist.some((m) => m.id === movieId),
     }),
     {
-      // ← sebelumnya pakai STORAGE_KEYS.favorites untuk keduanya
-      // sekarang pakai key gabungan yang proper
       name: 'movie-store',
       partialize: (state) => ({
         favorites: state.favorites,
