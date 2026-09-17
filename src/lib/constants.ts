@@ -20,12 +20,6 @@ export const IMAGE_SIZES = {
   },
 } as const;
 
-// Storage keys
-export const STORAGE_KEYS = {
-  favorites: 'movie-favorites',
-  watchlist: 'movie-watchlist',
-} as const;
-
 // Query keys
 export const QUERY_KEYS = {
   movies: {

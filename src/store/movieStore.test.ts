@@ -16,7 +16,7 @@ const movie: Movie = {
 };
 
 beforeEach(() => {
-  useMovieStore.setState({ favorites: [], watchlist: [] });
+  useMovieStore.setState({ favorites: [] });
 });
 
 describe('useMovieStore favorites', () => {
@@ -42,15 +42,6 @@ describe('useMovieStore favorites', () => {
     expect(useMovieStore.getState().isFavorite(movie.id)).toBe(true);
 
     useMovieStore.getState().toggleFavorite(movie);
-    expect(useMovieStore.getState().isFavorite(movie.id)).toBe(false);
-  });
-});
-
-describe('useMovieStore watchlist', () => {
-  it('toggles watchlist status independently of favorites', () => {
-    useMovieStore.getState().toggleWatchlist(movie);
-
-    expect(useMovieStore.getState().isInWatchlist(movie.id)).toBe(true);
     expect(useMovieStore.getState().isFavorite(movie.id)).toBe(false);
   });
 });
