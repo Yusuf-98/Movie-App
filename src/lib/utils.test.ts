@@ -16,7 +16,7 @@ describe('getImageUrl', () => {
 
 describe('formatDate', () => {
   it('formats an ISO date string', () => {
-    expect(formatDate('2024-03-15')).toBe('15 Maret 2024');
+    expect(formatDate('2024-03-15')).toBe('March 15, 2024');
   });
 
   it('returns N/A when there is no date', () => {
@@ -26,7 +26,7 @@ describe('formatDate', () => {
 
 describe('formatRuntime', () => {
   it('converts minutes into hours and minutes', () => {
-    expect(formatRuntime(125)).toBe('2j 5m');
+    expect(formatRuntime(125)).toBe('2h 5m');
   });
 
   it('omits the hour part when under 60 minutes', () => {
@@ -41,8 +41,7 @@ describe('formatRuntime', () => {
 
 describe('formatCurrency', () => {
   it('formats large amounts as compact USD', () => {
-    // Node's ICU data renders whole compact values as "$150M" or "$150.0M"
-    // depending on version, so match loosely instead of an exact string.
+    // ICU formatting varies by Node version
     expect(formatCurrency(150_000_000)).toMatch(/^\$150(\.0)?M$/);
   });
 
