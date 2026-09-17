@@ -70,7 +70,11 @@ export function FavoritesPage() {
 
       {/* Trailer Modal — fetch detail untuk dapat videos */}
       {trailerMovie && (
-        <TrailerModalFromStore movie={trailerMovie} onClose={() => setTrailerMovie(null)} />
+        <TrailerModalFromStore
+          movie={trailerMovie}
+          onClose={() => setTrailerMovie(null)}
+          onNoTrailer={() => setToast({ visible: true, message: 'No trailer available' })}
+        />
       )}
     </div>
   );
