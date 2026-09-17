@@ -10,6 +10,7 @@ import { FavoritesPage } from '../src/pages/FavoritePage';
 import { SearchPage } from '../src/pages/SearchPage';
 import { NotFoundState } from '../src/components/movie/NotFoundState';
 import { Footer } from './components/layout/Footer';
+import { ErrorBoundary } from './components/ErrorBoundary';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -52,7 +53,9 @@ function App() {
         <div className="min-h-screen bg-neutral-950 text-white">
           <Navbar />
           <main>
-            <AnimatedRoutes />
+            <ErrorBoundary>
+              <AnimatedRoutes />
+            </ErrorBoundary>
           </main>
           <Footer />
         </div>
