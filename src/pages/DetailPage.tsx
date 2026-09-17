@@ -7,6 +7,7 @@ import { DetailError } from '@/components/movie/ErrorState';
 import { MovieDetailHero } from '@/components/movie/MovieDetailHero';
 import { MovieOverview } from '@/components/movie/MovieOverview';
 import { CastSection } from '@/components/movie/CastSection';
+import { SimilarMoviesSection } from '@/components/movie/SimilarMoviesSection';
 import { TrailerModal } from '@/components/movie/TrailerModal';
 import { Toast } from '@/components/ui/Toast';
 
@@ -60,6 +61,7 @@ export function MovieDetailPage() {
 
   const videos = movie.videos?.results ?? [];
   const cast = movie.credits?.cast ?? [];
+  const similarMovies = movie.similar?.results ?? [];
   const favStatus = isFavorite(movie.id);
 
   return (
@@ -80,6 +82,9 @@ export function MovieDetailPage() {
 
       {/* Cast & Crew */}
       <CastSection cast={cast} />
+
+      {/* Similar Movies */}
+      <SimilarMoviesSection movies={similarMovies} />
 
       {/* Trailer Modal */}
       <TrailerModal
