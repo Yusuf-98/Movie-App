@@ -29,10 +29,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-# Claude AI files
-.claude/
-.clauderc
-.claude_history
-*.claude
-claude_project.json
