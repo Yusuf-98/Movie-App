@@ -1,9 +1,6 @@
-import { useEffect, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { motion, AnimatePresence } from 'framer-motion';
-import { searchSchema, type SearchFormValues } from '@/lib/schemas';
 import type { Movie } from '@/types/movie';
 import { Toast } from '../components/ui/Toast';
 import { SearchSkeleton } from '@/components/ui/SearchSkeleton';
@@ -13,53 +10,17 @@ import { InitState } from '@/components/movie/InitState';
 import { TrailerModalFromStore } from '@/components/movie/TrailerModalFromStore';
 import { useSearchMovies } from '@/hooks/useMovies';
 
+// The query string (and its validation) is owned by the Navbar search input,
+// which navigates here via `?q=`. This page only renders results for it.
 export function SearchPage() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const queryFromUrl = searchParams.get('q')?.trim() ?? '';
-
-  // Only set while user is typing ahead of the debounce.
-  // null means "no pending input — use the URL value".
-  const [pendingInput, setPendingInput] = useState<string | null>(null);
-
-  // The displayed input value: prefer what the user is typing,
-  // fall back to the committed URL value. No effect needed.
-  const inputValue = pendingInput ?? queryFromUrl;
 
   const [trailerMovie, setTrailerMovie] = useState<Movie | null>(null);
   const [toast, setToast] = useState({ visible: false, message: '' });
 
-  const {
-    setValue,
-    formState: { errors },
-  } = useForm<SearchFormValues>({
-    resolver: zodResolver(searchSchema),
-    defaultValues: { query: queryFromUrl },
-  });
-
   const { data, isLoading } = useSearchMovies(queryFromUrl);
   const results = data?.results ?? [];
-
-  // Debounce: commit pending input to the URL, then clear the pending state.
-  useEffect(() => {
-    if (pendingInput === null) return;
-
-    const timer = setTimeout(() => {
-      const q = pendingInput.trim();
-      setSearchParams(q.length >= 2 ? { q } : {});
-      setPendingInput(null); // URL has caught up — stop overriding
-    }, 400);
-
-    return () => clearTimeout(timer);
-  }, [pendingInput, setSearchParams]);
-
-  const handleInputChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const val = e.target.value;
-      setPendingInput(val);
-      setValue('query', val, { shouldValidate: true });
-    },
-    [setValue]
-  );
 
   const closeToast = useCallback(() => {
     setToast((p) => ({ ...p, visible: false }));
@@ -72,9 +33,6 @@ export function SearchPage() {
   return (
     <div className="bg-base-black min-h-screen flex flex-col">
       <Toast message={toast.message} visible={toast.visible} onClose={closeToast} />
-
-      {/* Wire to your actual search input */}
-      <input value={inputValue} onChange={handleInputChange} />
 
       <div className="flex-1 px-xl md:px-11xl pt-32.5">
         <AnimatePresence mode="wait">
@@ -106,14 +64,14 @@ export function SearchPage() {
             <InitState key="init" />
           )}
         </AnimatePresence>
-
-        {errors.query && (
-          <p className="text-primary-200 text-size-xs mt-md">{errors.query.message}</p>
-        )}
       </div>
 
       {trailerMovie && (
-        <TrailerModalFromStore movie={trailerMovie} onClose={() => setTrailerMovie(null)} />
+        <TrailerModalFromStore
+          movie={trailerMovie}
+          onClose={() => setTrailerMovie(null)}
+          onNoTrailer={() => setToast({ visible: true, message: 'No trailer available' })}
+        />
       )}
     </div>
   );
