@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import type { TrailerModalProps } from '@/types/movie';
+import { useModalA11y } from '@/hooks/useModalA11y';
 
 export function TrailerModal({ videos, visible, onClose, movieTitle }: TrailerModalProps) {
   // Find official YouTube trailer
@@ -8,6 +9,8 @@ export function TrailerModal({ videos, visible, onClose, movieTitle }: TrailerMo
     videos.find((v) => v.site === 'YouTube' && v.type === 'Trailer' && v.official) ??
     videos.find((v) => v.site === 'YouTube' && v.type === 'Trailer') ??
     videos.find((v) => v.site === 'YouTube');
+
+  const containerRef = useModalA11y(visible, onClose);
 
   return (
     <AnimatePresence>
@@ -31,7 +34,12 @@ export function TrailerModal({ videos, visible, onClose, movieTitle }: TrailerMo
             transition={{ duration: 0.25 }}
           >
             <div
-              className="relative w-full bg-neutral-900 overflow-hidden"
+              ref={containerRef}
+              role="dialog"
+              aria-modal="true"
+              aria-label={`${movieTitle} trailer`}
+              tabIndex={-1}
+              className="relative w-full bg-neutral-900 overflow-hidden outline-none"
               style={{
                 maxWidth: '900px',
                 borderRadius: '16px',
@@ -41,6 +49,7 @@ export function TrailerModal({ videos, visible, onClose, movieTitle }: TrailerMo
               {/* Close button */}
               <button
                 onClick={onClose}
+                aria-label="Close"
                 className="absolute top-4 right-4 z-10 flex items-center justify-center w-8 h-8 rounded-full bg-black/60 text-white hover:bg-black transition-colors"
               >
                 <X size={16} />

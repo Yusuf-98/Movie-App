@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm, useWatch } from 'react-hook-form';
@@ -23,6 +23,7 @@ import { scrollToTop } from '@/lib/scrollToTop';
 import Hamburger from '../../assets/icons/hamburger-menu.png';
 import CloseIcon from '../../assets/icons/x-icon.png';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useModalA11y } from '@/hooks/useModalA11y';
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -54,13 +55,6 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? 'hidden' : 'unset';
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [isMenuOpen]);
-
-  useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 678) {
         setIsMenuOpen(false);
@@ -71,10 +65,13 @@ export function Navbar() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const closeMenu = () => {
+  const closeMenu = useCallback(() => {
     setIsMenuOpen(false);
     setValue('query', '');
-  };
+  }, [setValue]);
+
+  const menuRef = useModalA11y(isMenuOpen, closeMenu);
+
   const openSearch = () => {
     setIsSearchOpen(true);
     if (isMenuOpen) closeMenu();
@@ -252,9 +249,10 @@ export function Navbar() {
                         <button
                           type="button"
                           onClick={() => setValue('query', '')}
+                          aria-label="Clear"
                           className="absolute right-4 p-0.75 transition-colors cursor-pointer"
                         >
-                          <img src={CloseInput} alt="Search Movie" className="w-5 h-5" />
+                          <img src={CloseInput} alt="Clear" className="w-5 h-5" />
                         </button>
                       )}
                       {errors.query && (
@@ -296,12 +294,17 @@ export function Navbar() {
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
+              ref={menuRef}
+              role="dialog"
+              aria-modal="true"
+              aria-label="Menu"
+              tabIndex={-1}
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'tween', duration: 0.3, ease: [0.32, 0.72, 0, 1] }}
               onClick={closeMenu}
-              className="fixed inset-0 w-full h-full bg-base-black overflow-y-auto overflow-x-hidden"
+              className="fixed inset-0 w-full h-full bg-base-black overflow-y-auto overflow-x-hidden outline-none"
               style={{ zIndex: 9999 }}
             >
               {/* Header: Logo + Close */}
