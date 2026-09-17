@@ -1,3 +1,4 @@
+// Image sizes
 export const IMAGE_SIZES = {
   poster: {
     small: 'w185',
@@ -19,11 +20,13 @@ export const IMAGE_SIZES = {
   },
 } as const;
 
+// Storage keys
 export const STORAGE_KEYS = {
   favorites: 'movie-favorites',
   watchlist: 'movie-watchlist',
 } as const;
 
+// Query keys
 export const QUERY_KEYS = {
   movies: {
     popular: (page: number) => ['movies', 'popular', page] as const,

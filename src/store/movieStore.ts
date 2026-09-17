@@ -6,11 +6,13 @@ interface MovieStore {
   favorites: Movie[];
   watchlist: Movie[];
 
+  // Favorites
   addToFavorites: (movie: Movie) => void;
   removeFromFavorites: (movieId: number) => void;
   toggleFavorite: (movie: Movie) => void;
   isFavorite: (movieId: number) => boolean;
 
+  // Watchlist
   addToWatchlist: (movie: Movie) => void;
   removeFromWatchlist: (movieId: number) => void;
   toggleWatchlist: (movie: Movie) => void;
@@ -23,6 +25,7 @@ export const useMovieStore = create<MovieStore>()(
       favorites: [],
       watchlist: [],
 
+      // Favorites
       addToFavorites: (movie) =>
         set((state) => {
           if (state.favorites.some((m) => m.id === movie.id)) return state;
@@ -45,6 +48,7 @@ export const useMovieStore = create<MovieStore>()(
 
       isFavorite: (movieId) => get().favorites.some((m) => m.id === movieId),
 
+      // Watchlist
       addToWatchlist: (movie) =>
         set((state) => {
           if (state.watchlist.some((m) => m.id === movie.id)) return state;
