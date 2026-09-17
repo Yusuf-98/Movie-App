@@ -4,17 +4,6 @@
 
 A movie discovery app built with React and the TMDB API — browse popular and trending titles, search, view details (cast, trailers, similar movies), and keep a favorites list that persists across sessions.
 
-## Tech Stack
-
-- **React 19** + **TypeScript** + **Vite**
-- **TanStack React Query** — data fetching & caching
-- **Zustand** — favorites state, persisted to localStorage
-- **React Router** — routing
-- **Radix UI & shadcn/ui** — accessible UI primitives
-- **Zod & React Hook Form** — search validation
-- **Framer Motion** — animations & transitions
-- **Tailwind CSS** — styling
-
 ## Screenshots
 
 | Home | Trending Now | New Release |
@@ -29,15 +18,31 @@ A movie discovery app built with React and the TMDB API — browse popular and t
 | --- | --- | --- |
 | ![Movie detail](docs/screenshots/detail-hero.png) | ![Cast & crew](docs/screenshots/detail-cast.png) | ![Trailer modal](docs/screenshots/trailer-modal.png) |
 
+## Features
+
+- **Home** — popular, now playing, and trending movies
+- **Search** — debounced search with validation
+- **Movie Detail** — overview, rating, genres, cast & crew, similar movies, trailer playback
+- **Favorites** — add/remove movies, persisted to localStorage
+
+## Tech Stack
+
+- **React 19** + **TypeScript** + **Vite**
+- **TanStack React Query** — data fetching & caching
+- **Zustand** — favorites state, persisted to localStorage
+- **React Router** — routing
+- **Radix UI & shadcn/ui** — accessible UI primitives
+- **Zod & React Hook Form** — search validation
+- **Framer Motion** — animations & transitions
+- **Tailwind CSS** — styling
+
 ## Getting Started
 
-### 1. Install dependencies
-
 ```bash
+git clone https://github.com/Yusuf-98/Movie-App.git
+cd Movie-App
 npm install
 ```
-
-### 2. Configure environment variables
 
 Copy `.env.example` to `.env` and add your [TMDB API key](https://www.themoviedb.org/settings/api):
 
@@ -49,18 +54,29 @@ cp .env.example .env
 VITE_TMDB_API_KEY=your_api_key_here
 ```
 
-### 3. Run the dev server
-
 ```bash
 npm run dev
 ```
 
-## Features
+Open `http://localhost:5173` in your browser.
 
-- **Home** — popular, now playing, and trending movies
-- **Search** — debounced search with validation
-- **Movie Detail** — overview, rating, genres, cast & crew, similar movies, trailer playback
-- **Favorites** — add/remove movies, persisted to localStorage
+## Testing
+
+```bash
+npm run test
+```
+
+Runs the Vitest suite once (store logic, utility functions, search validation, the trailer modal, and the error boundary).
+
+## Scripts
+
+```bash
+npm run dev       # start dev server
+npm run build     # type-check + production build
+npm run lint      # lint
+npm run test      # run tests
+npm run preview   # preview production build
+```
 
 ## Project Structure
 
@@ -75,26 +91,6 @@ src/
 └── lib/              # Axios instance, utilities, schemas
 ```
 
-## Testing
-
-Unit and interaction tests are written with [Vitest](https://vitest.dev/) and [React Testing Library](https://testing-library.com/react), covering store logic, utility functions, and key interactive flows (search validation, trailer modal behavior, error boundary).
-
-```bash
-npm run test
-```
-
-Every push and pull request also runs lint, type-check, tests, and a production build via GitHub Actions (see the CI badge above).
-
-## Scripts
-
-```bash
-npm run dev       # start dev server
-npm run build     # type-check + production build
-npm run lint      # lint
-npm run test      # run tests
-npm run preview   # preview production build
-```
-
 ## Author
 
-**Yusuf** — [@Yusuf-98](https://github.com/Yusuf-98)
+Built by [Yusuf AR](https://github.com/Yusuf-98).
