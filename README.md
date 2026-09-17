@@ -1,5 +1,7 @@
 # Movie Explorer
 
+[![CI](https://github.com/Yusuf-98/Movie-App/actions/workflows/ci.yml/badge.svg)](https://github.com/Yusuf-98/Movie-App/actions/workflows/ci.yml)
+
 A movie discovery app built with React and the TMDB API — browse popular and trending titles, search, view details (cast, trailers, similar movies), and keep a favorites list that persists across sessions.
 
 ## Tech Stack
@@ -79,5 +81,6 @@ src/
 npm run dev       # start dev server
 npm run build     # type-check + production build
 npm run lint      # lint
+npm run test      # run tests
 npm run preview   # preview production build
 ```
