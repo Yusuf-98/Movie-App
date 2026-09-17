@@ -75,6 +75,16 @@ src/
 └── lib/              # Axios instance, utilities, schemas
 ```
 
+## Testing
+
+Unit and interaction tests are written with [Vitest](https://vitest.dev/) and [React Testing Library](https://testing-library.com/react), covering store logic, utility functions, and key interactive flows (search validation, trailer modal behavior, error boundary).
+
+```bash
+npm run test
+```
+
+Every push and pull request also runs lint, type-check, tests, and a production build via GitHub Actions (see the CI badge above).
+
 ## Scripts
 
 ```bash
@@ -84,3 +94,7 @@ npm run lint      # lint
 npm run test      # run tests
 npm run preview   # preview production build
 ```
+
+## Author
+
+**Yusuf** — [@Yusuf-98](https://github.com/Yusuf-98)
