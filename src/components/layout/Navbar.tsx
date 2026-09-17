@@ -83,9 +83,7 @@ export function Navbar() {
     setValue('query', '');
   };
 
-  // react-hook-form's register() returns a ref callback by design (invoked by React
-  // on commit, not read during render) — safe despite the compiler's static heuristic.
-  // eslint-disable-next-line react-hooks/refs
+  // eslint-disable-next-line react-hooks/refs -- register()'s ref, not read during render
   const queryField = register('query', {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
       const val = e.target.value;
@@ -289,7 +287,7 @@ export function Navbar() {
         </AnimatePresence>
       </header>
 
-      {/* ── MOBILE FULLSCREEN MENU via Portal ── */}
+      {/* Mobile fullscreen menu */}
       {createPortal(
         <AnimatePresence>
           {isMenuOpen && (

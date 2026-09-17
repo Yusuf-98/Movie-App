@@ -22,7 +22,7 @@ export default function SearchResultItem({ movie, index, onWatchTrailer }: Searc
       transition={{ duration: 0.3, delay: index * 0.05 }}
       className="relative w-full bg-neutral-900 rounded-2xl p-xl md:p-3xl"
     >
-      {/* Favorite button — desktop only, pojok kanan atas */}
+      {/* Favorite button */}
       <div className="hidden md:block absolute top-xl right-xl z-10">
         <Button variant="favorite" isFavorite={fav} onClick={() => toggleFavorite(movie)}>
           <FavoriteIcon isFavorite={fav} />
@@ -87,7 +87,7 @@ export default function SearchResultItem({ movie, index, onWatchTrailer }: Searc
           <img src={PlayIcon} alt="" aria-hidden="true" className="w-6 h-6" />
         </Button>
 
-        {/* Favorite — mobil only */}
+        {/* Favorite — mobile only */}
         <div className="flex md:hidden">
           <Button variant="favorite" isFavorite={fav} onClick={() => toggleFavorite(movie)}>
             <FavoriteIcon isFavorite={fav} />

@@ -21,7 +21,6 @@ const queryClient = new QueryClient({
   },
 });
 
-// Dipisah jadi komponen sendiri karena useLocation harus di dalam BrowserRouter
 function AnimatedRoutes() {
   const location = useLocation();
 

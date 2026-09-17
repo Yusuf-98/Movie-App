@@ -56,7 +56,7 @@ export function FavoritesPage() {
                       onWatchTrailer={(m) => setTrailerMovie(m)}
                     />
 
-                    {/* Divider hanya muncul jika BUKAN item terakhir */}
+                    {/* Divider */}
                     {i !== favorites.length - 1 && (
                       <div className="w-full h-px bg-neutral-800 my-6xl" />
                     )}
@@ -68,7 +68,7 @@ export function FavoritesPage() {
         </div>
       </div>
 
-      {/* Trailer Modal — fetch detail untuk dapat videos */}
+      {/* Trailer modal */}
       {trailerMovie && (
         <TrailerModalFromStore
           movie={trailerMovie}

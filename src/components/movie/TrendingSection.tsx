@@ -11,7 +11,7 @@ function CustomNav() {
 
   return (
     <>
-      {/* Button Carrousel Kiri */}
+      {/* Carousel button — left */}
       <button
         onClick={scrollPrev}
         disabled={!canScrollPrev}
@@ -23,7 +23,7 @@ function CustomNav() {
         <img src={arrowLeft} alt="Previous" className="w-8 h-8 md:w-12 md:h-12 object-contain" />
       </button>
 
-      {/* Button Carrousel Kanan */}
+      {/* Carousel button — right */}
       <button
         onClick={scrollNext}
         disabled={!canScrollNext}
@@ -47,14 +47,14 @@ function CarouselBlurOverlay() {
 
   return (
     <>
-      {/* Blur Kiri */}
+      {/* Left blur */}
       <div
         className={`absolute left-0 top-0 h-full w-20 z-20 bg-linear-to-r from-black via-black/80 to-transparent pointer-events-none transition-opacity duration-300 ${
           canScrollPrev ? 'opacity-100' : 'opacity-0'
         }`}
       />
 
-      {/* Blur Kanan */}
+      {/* Right blur */}
       <div
         className={`absolute right-0 top-0 h-full w-20 z-20 bg-linear-to-l from-black via-black/80 to-transparent pointer-events-none transition-opacity duration-300 ${
           canScrollNext ? 'opacity-100' : 'opacity-0'
@@ -80,7 +80,7 @@ export function TrendingSection() {
           <Carousel opts={{ align: 'start', loop: false }} className="w-full">
             <CustomNav />
             <CarouselBlurOverlay />
-            {/* Daftar Movies */}
+            {/* Movie list */}
             <div className="w-full overflow-hidden">
               <CarouselContent className="flex flex-nowrap ml-0">
                 {isLoading

@@ -28,7 +28,7 @@ export default function FavoriteItem({
       className="w-full"
     >
       <div className="relative">
-        {/* Favorite button — desktop only, pojok kanan atas */}
+        {/* Favorite button */}
         <div className="hidden md:flex absolute top-0 right-0 z-10">
           <Button
             variant="favorite"

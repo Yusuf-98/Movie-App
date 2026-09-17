@@ -6,7 +6,7 @@ import type { MovieGridProps } from '@/types/movie';
 export function MovieGrid({ movies, isLoading, title, skeletonCount = 15 }: MovieGridProps) {
   return (
     <section>
-      {/* Tilte header */}
+      {/* Title */}
       <div className="w-full flex flex-col gap-3xl md:gap-4xl lg:gap-5xl">
         {title && (
           <motion.h2
@@ -18,7 +18,7 @@ export function MovieGrid({ movies, isLoading, title, skeletonCount = 15 }: Movi
             {title}
           </motion.h2>
         )}
-        {/* Calling Skeleton when loading */}
+        {/* Skeleton */}
         {isLoading ? (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-xl md:gap-2xl">
             {Array.from({ length: skeletonCount }).map((_, i) => (

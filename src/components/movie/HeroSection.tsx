@@ -73,7 +73,7 @@ export function HeroSection() {
               </p>
             </div>
 
-            {/* Buttons - Frame 6 */}
+            {/* Buttons */}
             <div className="flex flex-col md:flex-row gap-xl">
               {/* Button Primary - Watch Trailer */}
               <Button

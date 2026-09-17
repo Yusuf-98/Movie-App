@@ -36,11 +36,10 @@ export function HomePage() {
 
       {/* New Release */}
       <div className="relative z-10">
-        {/* Wrapper tanpa overflow-hidden */}
         <div className="relative">
           <MovieGrid movies={visibleMovies} isLoading={isLoading} title="New Release" />
 
-          {/* Gradient — pakai pointer-events-none agar tidak block klik */}
+          {/* Gradient overlay */}
           {canLoadMore && (
             <div
               className="absolute bottom-0 left-0 right-0 pointer-events-none"
@@ -53,7 +52,7 @@ export function HomePage() {
           )}
         </div>
 
-        {/* Tombol Load More */}
+        {/* Load More button */}
         {canLoadMore && (
           <div className="relative h-0">
             <div
@@ -79,7 +78,7 @@ export function HomePage() {
           </div>
         )}
 
-        {/* Spinner saat fetch page baru dan data lokal sudah habis */}
+        {/* Spinner */}
         {isFetchingNextPage && visibleCount >= allMovies.length && (
           <div className="flex justify-center py-8">
             <div className="w-8 h-8 border-2 border-neutral-25 border-t-neutral-800 rounded-full animate-spin" />

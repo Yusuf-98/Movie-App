@@ -1,6 +1,5 @@
 export default function SearchSkeleton() {
   return (
-    // Skeleton when loading
     <div className="flex flex-col">
       {Array.from({ length: 3 }).map((_, i) => (
         <div key={i}>

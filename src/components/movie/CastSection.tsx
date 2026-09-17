@@ -3,7 +3,6 @@ import CastCard from './CastCard';
 import type { CastSectionProps } from '@/types/movie';
 
 export function CastSection({ cast }: CastSectionProps) {
-  // Show top 6 cast members
   const displayCast = cast.slice(0, 6);
 
   if (!displayCast.length) return null;
@@ -20,7 +19,7 @@ export function CastSection({ cast }: CastSectionProps) {
         Cast &amp; Crew
       </h2>
 
-      {/* Grid: 3 columns desktop, 1 column mobile */}
+      {/* Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
         {displayCast.map((member, i) => (
           <CastCard key={member.credit_id ?? member.id} member={member} index={i} />

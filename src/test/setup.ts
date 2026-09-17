@@ -6,7 +6,7 @@ afterEach(() => {
   cleanup();
 });
 
-// jsdom doesn't implement these; several Radix UI primitives call them.
+// ResizeObserver polyfill
 class ResizeObserverStub {
   observe() {}
   unobserve() {}
@@ -14,6 +14,7 @@ class ResizeObserverStub {
 }
 window.ResizeObserver = window.ResizeObserver ?? (ResizeObserverStub as unknown as typeof ResizeObserver);
 
+// matchMedia polyfill
 if (!window.matchMedia) {
   window.matchMedia = (query: string) => ({
     matches: false,

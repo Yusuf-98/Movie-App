@@ -11,7 +11,6 @@ import { SimilarMoviesSection } from '@/components/movie/SimilarMoviesSection';
 import { TrailerModal } from '@/components/movie/TrailerModal';
 import { Toast } from '@/components/ui/Toast';
 
-// ── Main Page ────────────────────────────────────────────────────────────────
 export function MovieDetailPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -29,7 +28,6 @@ export function MovieDetailPage() {
   const handleToggleFavorite = useCallback(() => {
     if (!movie) return;
 
-    // Build a Movie-compatible object from MovieDetails
     const movieBase = {
       id: movie.id,
       title: movie.title,
@@ -66,10 +64,10 @@ export function MovieDetailPage() {
 
   return (
     <div className="custom-container bg-base-black">
-      {/* Toast notification */}
+      {/* Toast */}
       <Toast message={toast.message} visible={toast.visible} onClose={closeToast} />
 
-      {/* Hero: backdrop + poster + title + date + buttons */}
+      {/* Hero */}
       <MovieDetailHero
         movie={movie}
         isFavorite={favStatus}

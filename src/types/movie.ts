@@ -136,7 +136,7 @@ export interface SearchResultItemProps {
   onWatchTrailer: (movie: Movie) => void;
 }
 
-// ---- Movie Card -----
+// Movie Card
 
 export interface MovieCardProps {
   movie: Movie;
@@ -145,7 +145,7 @@ export interface MovieCardProps {
   rank?: number;
 }
 
-// ---- Movie Grid -----
+// Movie Grid
 
 export interface MovieGridProps {
   movies?: Movie[];
@@ -154,9 +154,9 @@ export interface MovieGridProps {
   skeletonCount?: number;
 }
 
-// ---- UI Components ----
+// UI Components
 
-// --Button--
+// Button
 
 export type ButtonType = 'primary' | 'secondary';
 export type ButtonSize = 'large' | 'small';
@@ -171,9 +171,6 @@ export interface ButtonProps {
   image?: React.ReactNode;
 }
 
-/**
- * Logo types
- */
 export interface LogoProps {
   className?: string;
   onClick?: () => void;

@@ -14,7 +14,6 @@ export function TrailerModalFromStore({ movie, onClose, onNoTrailer }: TrailerMo
   const videos = data?.videos?.results ?? [];
   const hasTrailer = videos.some((v) => v.site === 'YouTube');
 
-  // Only known once the detail fetch resolves — don't show an empty window meanwhile.
   useEffect(() => {
     if (!isLoading && !hasTrailer) {
       onNoTrailer?.();

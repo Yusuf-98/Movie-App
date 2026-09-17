@@ -10,8 +10,6 @@ import { InitState } from '@/components/movie/InitState';
 import { TrailerModalFromStore } from '@/components/movie/TrailerModalFromStore';
 import { useSearchMovies } from '@/hooks/useMovies';
 
-// The query string (and its validation) is owned by the Navbar search input,
-// which navigates here via `?q=`. This page only renders results for it.
 export function SearchPage() {
   const [searchParams] = useSearchParams();
   const queryFromUrl = searchParams.get('q')?.trim() ?? '';
@@ -32,8 +30,10 @@ export function SearchPage() {
 
   return (
     <div className="bg-base-black min-h-screen flex flex-col">
+      {/* Toast */}
       <Toast message={toast.message} visible={toast.visible} onClose={closeToast} />
 
+      {/* Results */}
       <div className="flex-1 px-xl md:px-11xl pt-32.5">
         <AnimatePresence mode="wait">
           {isLoading && hasQuery ? (
@@ -52,6 +52,7 @@ export function SearchPage() {
                     index={i}
                     onWatchTrailer={(m: Movie) => setTrailerMovie(m)}
                   />
+                  {/* Divider */}
                   {i !== results.length - 1 && (
                     <div className="w-full h-px bg-neutral-800 my-6xl" />
                   )}
@@ -66,6 +67,7 @@ export function SearchPage() {
         </AnimatePresence>
       </div>
 
+      {/* Trailer modal */}
       {trailerMovie && (
         <TrailerModalFromStore
           movie={trailerMovie}

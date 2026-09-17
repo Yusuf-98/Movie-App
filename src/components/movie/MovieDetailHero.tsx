@@ -32,7 +32,7 @@ export function MovieDetailHero({
         <div className="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent" />
       </div>
 
-      {/* Konten */}
+      {/* Content */}
       <div className="relative z-10 w-full max-w-360 mt-103">
         <div className="flex flex-row items-start gap-6">
           {/* Poster */}
