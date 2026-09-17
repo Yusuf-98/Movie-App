@@ -13,6 +13,20 @@ A movie discovery app built with React and the TMDB API — browse popular and t
 - **Framer Motion** — animations & transitions
 - **Tailwind CSS** — styling
 
+## Screenshots
+
+| Home | Trending Now | New Release |
+| --- | --- | --- |
+| ![Home hero](docs/screenshots/home-hero.png) | ![Trending Now](docs/screenshots/home-trending.png) | ![New Release](docs/screenshots/home-new-release.png) |
+
+| Search | Favorites |
+| --- | --- |
+| ![Search](docs/screenshots/search.png) | ![Favorites](docs/screenshots/favorites.png) |
+
+| Movie Detail | Cast & Crew | Trailer |
+| --- | --- | --- |
+| ![Movie detail](docs/screenshots/detail-hero.png) | ![Cast & crew](docs/screenshots/detail-cast.png) | ![Trailer modal](docs/screenshots/trailer-modal.png) |
+
 ## Getting Started
 
 ### 1. Install dependencies
