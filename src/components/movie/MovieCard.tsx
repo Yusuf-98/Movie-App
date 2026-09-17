@@ -77,6 +77,7 @@ export function MovieCard({ movie, index = 0, showRank = false, rank }: MovieCar
           fav ? 'bg-primary-300 opacity-100' : 'bg-black/60 hover:bg-primary-300'
         )}
         title={fav ? 'Remove from favorites' : 'Add to favorites'}
+        aria-label={fav ? 'Remove from favorites' : 'Add to favorites'}
       >
         <Heart
           size={14}

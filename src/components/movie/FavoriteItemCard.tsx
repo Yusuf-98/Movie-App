@@ -30,7 +30,12 @@ export default function FavoriteItem({
       <div className="relative">
         {/* Favorite button — desktop only, pojok kanan atas */}
         <div className="hidden md:flex absolute top-0 right-0 z-10">
-          <Button variant="favorite" isFavorite={isFavorite} onClick={() => onRemove(movie)}>
+          <Button
+            variant="favorite"
+            isFavorite={isFavorite}
+            onClick={() => onRemove(movie)}
+            aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+          >
             <FavoriteIcon isFavorite={isFavorite} />
           </Button>
         </div>
@@ -104,6 +109,7 @@ export default function FavoriteItem({
             isFavorite={isFavorite}
             onClick={() => onRemove(movie)}
             className="shrink-0"
+            aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
           >
             <FavoriteIcon isFavorite={isFavorite} />
           </Button>

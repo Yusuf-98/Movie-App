@@ -71,7 +71,11 @@ export function MovieDetailHero({
                     <img src={PlayIcon} alt="" aria-hidden="true" className="w-6 h-6" />
                   </Button>
                 )}
-                <Button variant="favorite" onClick={onToggleFavorite}>
+                <Button
+                  variant="favorite"
+                  onClick={onToggleFavorite}
+                  aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+                >
                   <FavoriteIcon isFavorite={isFavorite} />
                 </Button>
               </div>
@@ -93,7 +97,11 @@ export function MovieDetailHero({
                 <img src={PlayIcon} alt="" aria-hidden="true" className="w-6 h-6" />
               </Button>
             )}
-            <Button variant="favorite" onClick={onToggleFavorite}>
+            <Button
+              variant="favorite"
+              onClick={onToggleFavorite}
+              aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+            >
               <FavoriteIcon isFavorite={isFavorite} />
             </Button>
           </div>

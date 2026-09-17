@@ -15,6 +15,7 @@ function CustomNav() {
       <button
         onClick={scrollPrev}
         disabled={!canScrollPrev}
+        aria-label="Previous"
         className={`absolute left-4 md:-left-16 top-40 -translate-y-1/2 z-110 transition-opacity cursor-pointer bg-black/50 md:bg-transparent rounded-full p-1 ${
           !canScrollPrev ? 'opacity-0 pointer-events-none' : 'opacity-100'
         }`}
@@ -26,6 +27,7 @@ function CustomNav() {
       <button
         onClick={scrollNext}
         disabled={!canScrollNext}
+        aria-label="Next"
         className={`absolute right-4 md:-right-16 top-40 -translate-y-1/2 z-110 transition-opacity cursor-pointer bg-black/50 md:bg-transparent rounded-full p-1 ${
           !canScrollNext ? 'opacity-0 pointer-events-none' : 'opacity-100'
         }`}

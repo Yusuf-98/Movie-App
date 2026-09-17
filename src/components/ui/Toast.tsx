@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { X } from 'lucide-react';
 import type { ToastProps } from '@/types/movie';
 import CheckIcon from '../../assets/icons/check.png';
 
@@ -24,8 +25,11 @@ export function Toast({ message, visible, onClose, duration = 3000 }: ToastProps
           <span className="text-base-white text-md font-medium flex-1">{message}</span>
           <button
             onClick={onClose}
-            className="text-white/40 hover:text-white transition-colors ml-auto"
-          ></button>
+            aria-label="Close"
+            className="flex items-center justify-center text-white/40 hover:text-white transition-colors ml-auto"
+          >
+            <X size={16} />
+          </button>
         </motion.div>
       )}
     </AnimatePresence>
