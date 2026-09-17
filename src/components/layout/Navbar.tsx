@@ -1,12 +1,15 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { Link, useNavigate } from 'react-router-dom';
+import { useForm, useWatch } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import SearchIcon from '../../assets/icons/search.png';
 import ArrowBack from '../../assets/icons/arrow-back.png';
 import CloseInput from '../../assets/icons/close-input.png';
 import SearchInput from '../../assets/icons/search-input.png';
 import { useMovieStore } from '@/store/movieStore';
 import { cn } from '@/lib/utils';
+import { searchSchema, type SearchFormValues } from '@/lib/schemas';
 import Logo from '../ui/Logo';
 import {
   NavigationMenu,
@@ -23,14 +26,26 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [query, setQuery] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
-  const inputRef = useRef<HTMLInputElement>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const navigate = useNavigate();
   const { favorites } = useMovieStore();
+
+  const {
+    register,
+    handleSubmit,
+    control,
+    setValue,
+    setFocus,
+    formState: { errors },
+  } = useForm<SearchFormValues>({
+    resolver: zodResolver(searchSchema),
+    defaultValues: { query: '' },
+    mode: 'onChange',
+  });
+  const query = useWatch({ control, name: 'query' });
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 0);
@@ -58,23 +73,25 @@ export function Navbar() {
 
   const closeMenu = () => {
     setIsMenuOpen(false);
-    setQuery('');
+    setValue('query', '');
   };
   const openSearch = () => {
     setIsSearchOpen(true);
     if (isMenuOpen) closeMenu();
-    setQuery('');
-    setTimeout(() => inputRef.current?.focus(), 150);
+    setValue('query', '');
+    setTimeout(() => setFocus('query'), 150);
   };
   const closeSearch = () => {
     setIsSearchOpen(false);
-    setQuery('');
+    setValue('query', '');
   };
 
-  const handleChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
+  // react-hook-form's register() returns a ref callback by design (invoked by React
+  // on commit, not read during render) — safe despite the compiler's static heuristic.
+  // eslint-disable-next-line react-hooks/refs
+  const queryField = register('query', {
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
       const val = e.target.value;
-      setQuery(val);
       clearTimeout(timerRef.current);
       if (val.trim().length > 1) {
         timerRef.current = setTimeout(() => {
@@ -82,15 +99,11 @@ export function Navbar() {
         }, 500);
       }
     },
-    [navigate]
-  );
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (query.trim().length > 1) {
-      navigate(`/search?q=${encodeURIComponent(query.trim())}`);
-      setTimeout(closeSearch, 200);
-    }
+  const onSubmit = (values: SearchFormValues) => {
+    navigate(`/search?q=${encodeURIComponent(values.query.trim())}`);
+    setTimeout(closeSearch, 200);
   };
 
   return (
@@ -123,17 +136,18 @@ export function Navbar() {
               </button>
 
               {/* Search form */}
-              <form onSubmit={handleSubmit} className="flex-1 relative flex items-center">
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="flex-1 relative flex items-center"
+              >
                 <img
                   src={SearchInput}
                   alt="Search Movie"
                   className="w-6 h-6 absolute left-4 text-neutral-500 pointer-events-none shrink-0"
                 />
                 <Input
-                  ref={inputRef}
+                  {...queryField}
                   type="text"
-                  value={query}
-                  onChange={handleChange}
                   placeholder="Search Movie"
                   autoFocus
                   className={cn(
@@ -146,12 +160,17 @@ export function Navbar() {
                 {query && (
                   <button
                     type="button"
-                    onClick={() => setQuery('')}
+                    onClick={() => setValue('query', '')}
                     aria-label="Clear"
                     className="absolute right-3 flex items-center justify-center  py-md px-xl cursor-pointer "
                   >
                     <img src={CloseInput} alt="Clear Typing" className="w-4 h-4" />
                   </button>
+                )}
+                {errors.query && (
+                  <p className="absolute top-full left-0 mt-xs text-primary-200 text-size-xs">
+                    {errors.query.message}
+                  </p>
                 )}
               </form>
             </motion.div>
@@ -213,7 +232,10 @@ export function Navbar() {
                 {/* Right: Desktop Search + Mobile Icons */}
                 <div className="flex items-center gap-3 md:gap-4">
                   {/* Desktop Search */}
-                  <form onSubmit={handleSubmit} className="relative w-60.75 h-14 hidden md:block">
+                  <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className="relative w-60.75 h-14 hidden md:block"
+                  >
                     <div className="relative w-full h-full flex items-center">
                       <img
                         src={SearchIcon}
@@ -221,20 +243,24 @@ export function Navbar() {
                         className="w-6 h-6 absolute left-4 text-neutral-500 pointer-events-none"
                       />
                       <Input
+                        {...queryField}
                         type="text"
-                        value={query}
-                        onChange={handleChange}
                         placeholder="Search Movie"
                         className="h-full w-full border transition-all duration-200 pl-12 pr-10 bg-neutral-950/60 text-neutral-25 placeholder:text-neutral-500 border-neutral-800 focus:border-neutral-500/30 focus:border"
                       />
                       {query && (
                         <button
                           type="button"
-                          onClick={() => setQuery('')}
+                          onClick={() => setValue('query', '')}
                           className="absolute right-4 p-0.75 transition-colors cursor-pointer"
                         >
                           <img src={CloseInput} alt="Search Movie" className="w-5 h-5" />
                         </button>
+                      )}
+                      {errors.query && (
+                        <p className="absolute top-full left-0 mt-xs text-primary-200 text-size-xs whitespace-nowrap">
+                          {errors.query.message}
+                        </p>
                       )}
                     </div>
                   </form>
