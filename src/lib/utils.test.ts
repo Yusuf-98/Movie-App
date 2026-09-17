@@ -41,7 +41,9 @@ describe('formatRuntime', () => {
 
 describe('formatCurrency', () => {
   it('formats large amounts as compact USD', () => {
-    expect(formatCurrency(150_000_000)).toBe('$150M');
+    // Node's ICU data renders whole compact values as "$150M" or "$150.0M"
+    // depending on version, so match loosely instead of an exact string.
+    expect(formatCurrency(150_000_000)).toMatch(/^\$150(\.0)?M$/);
   });
 
   it('returns N/A for a falsy amount', () => {
