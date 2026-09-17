@@ -4,6 +4,8 @@
 
 A movie discovery app built with React and the TMDB API — browse popular and trending titles, search, view details (cast, trailers, similar movies), and keep a favorites list that persists across sessions.
 
+🚀 **Live demo:** https://movie-app-by-yusuf-ar.vercel.app/
+
 ## Screenshots
 
 | Home | Trending Now | New Release |
