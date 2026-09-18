@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useMovieStore } from '@/store/movieStore';
 import { getImageUrl } from '@/lib/utils';
 import { IMAGE_SIZES } from '@/lib/constants';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import type { SearchResultItemProps } from '@/types/movie';
 import PlayIcon from '../../assets/icons/play.png';
 import StarIcon from '../../assets/icons/star-yellow.png';
@@ -10,7 +10,6 @@ import { Button } from '../ui/button';
 import FavoriteIcon from '../ui/FavoriteIcon';
 
 export default function SearchResultItem({ movie, index, onWatchTrailer }: SearchResultItemProps) {
-  const navigate = useNavigate();
   const { isFavorite, toggleFavorite } = useMovieStore();
   const fav = isFavorite(movie.id);
   const posterUrl = getImageUrl(movie.poster_path, IMAGE_SIZES.poster.medium);
@@ -32,9 +31,9 @@ export default function SearchResultItem({ movie, index, onWatchTrailer }: Searc
       {/* Row: poster + info */}
       <div className="flex flex-row gap-xl mb-xl md:pr-14">
         {/* Poster */}
-        <div
-          onClick={() => navigate(`/movie/${movie.id}`)}
-          className="shrink-0 aspect-2/3 rounded-lg overflow-hidden bg-neutral-800 cursor-pointer w-23 md:w-33"
+        <Link
+          to={`/movie/${movie.id}`}
+          className="shrink-0 aspect-2/3 rounded-lg overflow-hidden bg-neutral-800 w-23 md:w-33 block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-200 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-900"
         >
           {movie.poster_path ? (
             <img
@@ -48,16 +47,18 @@ export default function SearchResultItem({ movie, index, onWatchTrailer }: Searc
               🎬
             </div>
           )}
-        </div>
+        </Link>
 
         {/* Info */}
         <div className="flex-1 min-w-0 flex flex-col gap-xs">
           {/* Title */}
-          <h3
-            onClick={() => navigate(`/movie/${movie.id}`)}
-            className="m-0 text-neutral-25 font-bold text-size-md md:text-size-display-xs leading-snug cursor-pointer line-clamp-2"
-          >
-            {movie.title}
+          <h3 className="m-0 text-neutral-25 font-bold text-size-md md:text-size-display-xs leading-snug line-clamp-2">
+            <Link
+              to={`/movie/${movie.id}`}
+              className="hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-200 rounded-sm"
+            >
+              {movie.title}
+            </Link>
           </h3>
 
           {/* Rating */}

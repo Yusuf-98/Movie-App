@@ -1,6 +1,6 @@
 import type { FavoriteItemProps } from '@/types/movie';
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PlayIcon from '../../assets/icons/play.png';
 import { IMAGE_SIZES } from '@/lib/constants';
 import { getImageUrl } from '@/lib/utils';
@@ -15,7 +15,6 @@ export default function FavoriteItem({
   onRemove,
   onWatchTrailer,
 }: FavoriteItemProps) {
-  const navigate = useNavigate();
   const posterUrl = getImageUrl(movie.poster_path, IMAGE_SIZES.poster.medium);
 
   return (
@@ -43,9 +42,9 @@ export default function FavoriteItem({
         {/* poster + info */}
         <div className="flex flex-row gap-xl md:gap-3xl w-full mb-xl md:pr-14">
           {/* Poster */}
-          <div
-            onClick={() => navigate(`/movie/${movie.id}`)}
-            className="shrink-0 overflow-hidden cursor-pointer w-26 md:w-45.5 h-39 md:h-67.5 rounded-xl"
+          <Link
+            to={`/movie/${movie.id}`}
+            className="shrink-0 overflow-hidden w-26 md:w-45.5 h-39 md:h-67.5 rounded-xl block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-200 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950"
           >
             <img
               src={posterUrl}
@@ -53,16 +52,18 @@ export default function FavoriteItem({
               className="block w-full h-full object-cover"
               loading="lazy"
             />
-          </div>
+          </Link>
 
           {/* Info */}
           <div className="flex-1 min-w-0 flex flex-col gap-xs md:gap-lg">
             {/* Title */}
-            <h3
-              onClick={() => navigate(`/movie/${movie.id}`)}
-              className="m-0 text-neutral-25 font-bold text-size-md md:text-size-display-xs cursor-pointer line-clamp-2"
-            >
-              {movie.title}
+            <h3 className="m-0 text-neutral-25 font-bold text-size-md md:text-size-display-xs line-clamp-2">
+              <Link
+                to={`/movie/${movie.id}`}
+                className="hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-200 rounded-sm"
+              >
+                {movie.title}
+              </Link>
             </h3>
 
             {/* Rating */}

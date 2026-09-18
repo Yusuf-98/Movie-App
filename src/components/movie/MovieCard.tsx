@@ -20,7 +20,11 @@ export function MovieCard({ movie, index = 0, showRank = false, rank }: MovieCar
       transition={{ duration: 0.3, delay: Math.min(index * 0.05, 0.5) }}
       className="group relative shrink-0"
     >
-      <Link to={`/movie/${movie.id}`} onClick={scrollToTop} className="block">
+      <Link
+        to={`/movie/${movie.id}`}
+        onClick={scrollToTop}
+        className="block rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-200 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+      >
         {/* Poster */}
         <div className="relative flex flex-col overflow-hidden bg-base-black">
           {movie.poster_path ? (
