@@ -6,6 +6,11 @@ A movie discovery app built with React and the TMDB API — browse popular and t
 
 🚀 **Live demo:** https://movie-app-by-yusuf-ar.vercel.app/
 
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-6-blue?logo=typescript)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-4-38bdf8?logo=tailwindcss)
+![License](https://img.shields.io/badge/license-MIT-green)
+
 ## Screenshots
 
 | Home | Trending Now | New Release |
@@ -96,3 +101,7 @@ src/
 ## Author
 
 Built by [Yusuf AR](https://github.com/Yusuf-98).
+
+## License
+
+Licensed under the [MIT License](LICENSE).
